@@ -3,6 +3,7 @@ import express from 'express';
 import { envs } from './config';
 import { GithubController } from './presentation/github/github.controller';
 import { GitHubService } from './presentation/services/github.service';
+import { DiscordService } from './presentation/services/discord.service';
 
 (() => {
     main();
@@ -11,7 +12,8 @@ import { GitHubService } from './presentation/services/github.service';
 function main() {
     const app = express();
     const githubService = new GitHubService();
-    const githubController = new GithubController( githubService );
+    const discordService = new DiscordService();
+    const githubController = new GithubController( githubService, discordService );
 
     app.use( express.json() );
 
